@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import rules from './rules';
 
 class App extends Component {
 
@@ -13,8 +14,7 @@ class App extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
-    alert(this.state.licensePlateNumber + '\n' + this.state.date + '\n' + this.state.time);
+    alert(this.checkData(rules, this.state.licensePlateNumber, this.state.date, this.state.time));
   };
 
   getForbiddenNumbers = (rules, date) => {
@@ -41,6 +41,14 @@ class App extends Component {
     const startInMillis = this.timeToMillis(start);
     const endInMillis = this.timeToMillis(end);
     return timeInMillis < startInMillis || timeInMillis > endInMillis;
+  };
+
+  checkData = (rules, licensePlateNumber, date, time) => {
+    const forbidden = this.getForbiddenNumbers(rules, date);
+    if (forbidden.length > 0)
+      if (this.checkLicensePlateNumber(forbidden, licensePlateNumber))
+        if (!this.checkTime(time, rules.start, rules.end)) return 'No. You can\'t take your car out';
+    return 'Yes. You can take your car out';
   };
 
   render() {
