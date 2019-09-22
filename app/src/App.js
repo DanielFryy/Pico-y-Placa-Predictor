@@ -17,6 +17,13 @@ class App extends Component {
     alert(this.state.licensePlateNumber + '\n' + this.state.date + '\n' + this.state.time);
   };
 
+  getForbiddenNumbers = (rules, date) => {
+    let forbidden = [];
+    const day = new Date(date).getUTCDay();
+    if (day >= 1 && day <= 5) forbidden.push(...rules.days[day].forbidden);
+    return forbidden;
+  };
+
   render() {
     return (
       <div className="App">
