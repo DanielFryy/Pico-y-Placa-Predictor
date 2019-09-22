@@ -29,6 +29,20 @@ class App extends Component {
     return forbidden.indexOf(lastNumber) >= 0;
   };
 
+  timeToMillis = time => {
+    const parts = time.split(':');
+    const hours = parseInt(parts[0]);
+    const minutes = parseInt(parts[1]);
+    return hours * 1000 * 60 * 60 + minutes * 1000 * 60;
+  };
+
+  checkTime = (time, start, end) => {
+    const timeInMillis = this.timeToMillis(time);
+    const startInMillis = this.timeToMillis(start);
+    const endInMillis = this.timeToMillis(end);
+    return timeInMillis < startInMillis || timeInMillis > endInMillis;
+  };
+
   render() {
     return (
       <div className="App">
