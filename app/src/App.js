@@ -49,7 +49,7 @@ class App extends Component {
                 value={ this.state.time } onChange={ this.onChange }/>
               </li>
               <li>
-                <button type="submit">Submit</button>
+                <button type="submit">Check</button>
               </li>
             </ul>
           </form>
