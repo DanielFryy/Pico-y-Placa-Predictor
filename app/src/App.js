@@ -24,6 +24,11 @@ class App extends Component {
     return forbidden;
   };
 
+  checkLicensePlateNumber = (forbidden, licensePlateNumber) => {
+    const lastNumber = parseInt(licensePlateNumber[licensePlateNumber.length - 1]);
+    return forbidden.indexOf(lastNumber) >= 0;
+  };
+
   render() {
     return (
       <div className="App">
