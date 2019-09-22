@@ -14,9 +14,7 @@ class App extends Component {
   onSubmit = e => {
     e.preventDefault();
     console.log(this.state);
-    if (this.state.licensePlateNumber && this.state.date && this.state.time) {
-      alert(this.state.licensePlateNumber + '\n' + this.state.date + '\n' + this.state.time);
-    }
+    alert(this.state.licensePlateNumber + '\n' + this.state.date + '\n' + this.state.time);
   };
 
   render() {
@@ -27,17 +25,20 @@ class App extends Component {
             <ul className="flex-outer">
               <li>
                 <label>License plate number</label>
-                <input id="licensePlateNumber" type="text" name="licensePlateNumber" placeholder="Enter a license plate number"
+                <input id="licensePlateNumber" type="text" name="licensePlateNumber"
+                required placeholder="Enter a license plate number: 0569"
+                pattern="\d{3}|\d{4}"
                 value={ this.state.licensePlateNumber } onChange={ this.onChange }/>
               </li>
               <li>
                 <label>Date</label>
-                <input id="date" type="date" name="date" value={ this.state.date } onChange={ this.onChange }/>
+                <input id="date" type="date" name="date" value={ this.state.date }
+                required onChange={ this.onChange }/>
               </li>
               <li>
                 <label>Time</label>
                 <input id="time" type="text" name="time" pattern="(([01]\d)|(2[0-3])):[0-5]\d"
-                placeholder="Enter time in 24 hours format: 15:35"
+                required placeholder="Enter time in 24 hours format: 15:35"
                 value={ this.state.time } onChange={ this.onChange }/>
               </li>
               <li>
